@@ -22,5 +22,9 @@ data['Date_of_onset'] = pd.to_datetime(data['Date_of_onset'])
 data['Email_Time_Stamp_y'] = pd.to_datetime(data['Email_Time_Stamp_y'])
 data['days_from_onset'] = ((data['Email_Time_Stamp_y'] - data['Date_of_onset']).dt.total_seconds()/(60*60*24))
 data['days_from_onset'].head(10)
+data[(data['percentage_recovery_smell']<80) & (data['Recovery_y/n_y']==0)].count() 
 
+#https://github.com/CamDavidsonPilon/lifelines
+#https://github.com/sebp/scikit-survival
+#https://github.com/sashaostr/sklearn-lifelines
 # https://www.analyticsvidhya.com/blog/2020/12/a-brief-introduction-to-survival-analysis-and-kaplan-meier-estimator/
