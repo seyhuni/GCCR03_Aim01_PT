@@ -33,7 +33,7 @@ data['Date_of_onset'] = pd.to_datetime(data['Date_of_onset'])
 data['days_from_onset'] = ((data['Smell_after_illness_Time_Stamp'] - data['Date_of_onset']).dt.total_seconds()/(60*60*24))
 data['days_from_onset'].head()
 X = data[['days_from_onset']]
-y = data['Smell_before_illness'] - data['Smell_after_illness']
+y = data['Smell_before_illness'] - data['Smell_current']
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 from sklearn.linear_model import LinearRegression
