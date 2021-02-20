@@ -29,7 +29,7 @@ data.head()
 smell_df = data[['DurationInDays', 'Smell_before_illness', 'Smell_current', 'Status']]
 taste_df = data[['DurationInDays', 'Taste_before_illness', 'Taste_current', 'Status']]
 
-#♣ drop nan records
+# drop nan records
 smell_df = smell_df.dropna()
 taste_df = taste_df.dropna()
 
@@ -61,18 +61,22 @@ lm.fit(X_train, y_train)
 
 print('Coefficients: \n', lm.coef_)
 predictions = lm.predict(X_test)
+plt.figure(dpi=300)
 plt.scatter(y_test, predictions)
 plt.xlabel('Y Test')
 plt.ylabel('Predicted Y')
+plt.show()
 
 print('MAE:', metrics.mean_absolute_error(y_test, predictions))
 print('MSE:', metrics.mean_squared_error(y_test, predictions))
 print('RMSE:', np.sqrt(metrics.mean_squared_error(y_test, predictions)))
 
 time, survival_prob = kaplan_meier_estimator(smell_df["Status"], smell_df["DurationInDays"])
+plt.figure(dpi=300)
 plt.step(time, survival_prob, where="post")
 plt.ylabel("est. probability of survival $\hat{S}(t)$")
 plt.xlabel("time $t$")
+plt.show()
 
 # study for taste
 taste_X = taste_df[['DurationInDays']]
@@ -84,15 +88,19 @@ lm.fit(X_train, y_train)
 
 print('Coefficients: \n', lm.coef_)
 predictions = lm.predict(X_test)
+plt.figure(dpi=300)
 plt.scatter(y_test, predictions)
 plt.xlabel('Y Test')
 plt.ylabel('Predicted Y')
+plt.show()
 
 print('MAE:', metrics.mean_absolute_error(y_test, predictions))
 print('MSE:', metrics.mean_squared_error(y_test, predictions))
 print('RMSE:', np.sqrt(metrics.mean_squared_error(y_test, predictions)))
 
 time, survival_prob = kaplan_meier_estimator(taste_df["Status"], taste_df["DurationInDays"])
+plt.figure(dpi=300)
 plt.step(time, survival_prob, where="post")
 plt.ylabel("est. probability of survival $\hat{S}(t)$")
 plt.xlabel("time $t$")
+plt.show()
